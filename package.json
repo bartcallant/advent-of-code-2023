@@ -3,7 +3,8 @@
 	"version": "0.0.0",
 	"license": "MIT",
 	"scripts": {
-		"format": "prettier --write .",
+		"format:check": "prettier --check .",
+		"format:write": "prettier --write .",
 		"lint": "nx affected --target=lint",
 		"test": "nx affected --target=test",
 		"build": "nx affected --target=build",
