@@ -1,0 +1,55 @@
+{
+	"name": "ts",
+	"$schema": "../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "libs/ts/src",
+	"projectType": "library",
+	"targets": {
+		"build": {
+			"executor": "@nx/js:tsc",
+			"outputs": ["{options.outputPath}"],
+			"options": {
+				"outputPath": "dist/libs/ts",
+				"main": "libs/ts/src/index.ts",
+				"tsConfig": "libs/ts/tsconfig.lib.json",
+				"assets": [
+					"libs/ts/*.md",
+					{
+						"input": "./libs/ts/src",
+						"glob": "**/!(*.ts)",
+						"output": "./src"
+					},
+					{
+						"input": "./libs/ts/src",
+						"glob": "**/*.d.ts",
+						"output": "./src"
+					},
+					{
+						"input": "./libs/ts",
+						"glob": "generators.json",
+						"output": "."
+					},
+					{
+						"input": "./libs/ts",
+						"glob": "executors.json",
+						"output": "."
+					}
+				]
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint",
+			"outputs": ["{options.outputFile}"],
+			"options": {
+				"lintFilePatterns": ["libs/ts/**/*.ts", "libs/ts/package.json", "libs/ts/generators.json"]
+			}
+		},
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+			"options": {
+				"jestConfig": "libs/ts/jest.config.ts"
+			}
+		}
+	},
+	"tags": []
+}

@@ -15,7 +15,9 @@
 		"skipLibCheck": true,
 		"skipDefaultLibCheck": true,
 		"baseUrl": ".",
-		"paths": {},
+		"paths": {
+			"@advent-of-code-2023/ts": ["libs/ts/src/index.ts"]
+		},
 		"moduleResolution": "Bundler",
 		"module": "ES2022"
 	},
