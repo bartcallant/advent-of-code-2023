@@ -1,0 +1,70 @@
+{
+	"name": "day-02",
+	"$schema": "../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "apps/day-02/src",
+	"projectType": "application",
+	"targets": {
+		"build": {
+			"executor": "@nx/esbuild:esbuild",
+			"outputs": ["{options.outputPath}"],
+			"defaultConfiguration": "production",
+			"options": {
+				"platform": "node",
+				"outputPath": "dist/apps/day-02",
+				"format": ["esm"],
+				"bundle": true,
+				"main": "apps/day-02/src/index.ts",
+				"tsConfig": "apps/day-02/tsconfig.app.json",
+				"generatePackageJson": true,
+				"esbuildOptions": {
+					"sourcemap": true,
+					"outExtension": {
+						".js": ".js"
+					}
+				}
+			},
+			"configurations": {
+				"development": {},
+				"production": {
+					"esbuildOptions": {
+						"sourcemap": false,
+						"outExtension": {
+							".js": ".js"
+						}
+					}
+				}
+			}
+		},
+		"run": {
+			"executor": "@nx/js:node",
+			"defaultConfiguration": "development",
+			"options": {
+				"buildTarget": "day-02:build",
+				"watch": false
+			},
+			"configurations": {
+				"development": {
+					"buildTarget": "day-02:build:development"
+				},
+				"production": {
+					"buildTarget": "day-02:build:production"
+				}
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint",
+			"outputs": ["{options.outputFile}"],
+			"options": {
+				"lintFilePatterns": ["apps/day-02/**/*.ts"]
+			}
+		},
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+			"options": {
+				"jestConfig": "apps/day-02/jest.config.ts"
+			}
+		}
+	},
+	"tags": []
+}
