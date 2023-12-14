@@ -1,0 +1,70 @@
+{
+	"name": "day-14",
+	"$schema": "../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "apps/day-14/src",
+	"projectType": "application",
+	"targets": {
+		"build": {
+			"executor": "@nx/esbuild:esbuild",
+			"outputs": ["{options.outputPath}"],
+			"defaultConfiguration": "production",
+			"options": {
+				"platform": "node",
+				"outputPath": "dist/apps/day-14",
+				"format": ["esm"],
+				"bundle": true,
+				"main": "apps/day-14/src/index.ts",
+				"tsConfig": "apps/day-14/tsconfig.app.json",
+				"generatePackageJson": true,
+				"esbuildOptions": {
+					"sourcemap": true,
+					"outExtension": {
+						".js": ".js"
+					}
+				}
+			},
+			"configurations": {
+				"development": {},
+				"production": {
+					"esbuildOptions": {
+						"sourcemap": false,
+						"outExtension": {
+							".js": ".js"
+						}
+					}
+				}
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint",
+			"outputs": ["{options.outputFile}"],
+			"options": {
+				"lintFilePatterns": ["apps/day-14/**/*.ts"]
+			}
+		},
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+			"options": {
+				"jestConfig": "apps/day-14/jest.config.ts"
+			}
+		},
+		"run": {
+			"executor": "@nx/js:node",
+			"defaultConfiguration": "development",
+			"options": {
+				"buildTarget": "day-14:build",
+				"watch": false
+			},
+			"configurations": {
+				"development": {
+					"buildTarget": "day-14:build:development"
+				},
+				"production": {
+					"buildTarget": "day-14:build:production"
+				}
+			}
+		}
+	},
+	"tags": []
+}
