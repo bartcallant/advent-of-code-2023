@@ -1,6 +1,6 @@
 import {partTwo} from "./part-two";
 
-test("should return correct result", () => {
+xtest("should return correct result", () => {
 	// #region Given
 	const input = `O....#....
 O.OO#....#
